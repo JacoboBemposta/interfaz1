@@ -328,12 +328,12 @@ public class Interfaz1 {
                       Container cont=(Container) listabarcos.get(i);
                       if(cont.hundido==false){
                             cont.ver_datos();
-                       }else System.out.println("El containero "+cont.nombre+"  esta hundido");
+                       }else System.out.println("El container "+cont.nombre+"  esta hundido");
                 }if(listabarcos.get(i)instanceof Hidroavion){
                      Hidroavion hidro=(Hidroavion) listabarcos.get(i);
                      if(hidro.hundido==false){
                          hidro.ver_datos();
-                         }else System.out.println("El hidroaviono "+hidro.nombre+"  esta hundido");
+                         }else System.out.println("El hidroavion "+hidro.nombre+"  esta hundido");
                  }
             }
       }
