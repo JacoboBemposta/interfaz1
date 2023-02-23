@@ -265,15 +265,81 @@ public class Interfaz1 {
                   }while(seleccion!=0);                  
                   break;
               case 4:
+                  seleccion=0;
+                  do{
+                      System.out.println("Menu Asimetrico");
+                      System.out.println("1 - alta ");
+                      System.out.println("2- estado de flotacion  ");
+                      System.out.println("3- atracar");
+                      System.out.println("4- ver datos");
+                      System.out.println("5- Camhiar capacidad");
+                      System.out.println("0- salir");
+                      seleccion=teclado.nextInt();
+                      switch(seleccion){
+                          case 1:
+                              Asimetrico asimetrico=new Asimetrico();
+                              asimetrico.alta();
+                              System.out.println("Alta ok");
+                              listabarcos.add(asimetrico);
+                              break;
+                          case 2:
+                              System.out.println("Indica el nombre del asimetrico");
+                              String nombre=teclado.next();
+                              int posicion=buscar_asimetrico(listabarcos, nombre);
+                              if(posicion!=-1){
+                                  Asimetrico asim=(Asimetrico)listabarcos.get(posicion);
+                                  if(asim.hundirse())System.out.println("El asimetrico se ha hundido");
+                                  else System.out.println("El asimetrico esta navegando");                                
+                              }
+                              break;
+
+                          case 3:
+                              System.out.println("Indica el nombre del asimetrico");
+                              nombre=teclado.next();
+                              posicion=buscar_asimetrico(listabarcos, nombre);
+                              if(posicion!=-1){
+                                  Asimetrico asim=(Asimetrico)listabarcos.get(posicion);
+                                  System.out.println("Indica el puerto");
+                                  String puerto=teclado.next();
+                                  System.out.println("Indica la hora");
+                                  String hora=teclado.next();
+                                  asim.atracar(puerto, hora);
+                              }                           
+                              break;
+                          case 4:
+                              System.out.println("Indica el nombre del asimetrico");
+                              nombre=teclado.next();
+                              posicion=buscar_asimetrico(listabarcos, nombre);
+                              if(posicion!=-1){
+                                  Asimetrico asim=(Asimetrico)listabarcos.get(posicion);
+                                  asim.ver_datos();
+                              }
+                              break;
+                          case 5:
+                              System.out.println("Indica nombre del asimetrico");
+                              nombre=teclado.next();
+                              posicion=buscar_transatlantico(listabarcos, nombre);
+                              if(posicion!=-1){
+                                  System.out.println("Indica la nueva capacidad");
+                                  float capacidad=teclado.nextFloat();
+                                  Asimetrico asim=(Asimetrico)listabarcos.get(posicion);
+                                  asim.setCapacidad(capacidad);
+                              }
+                              break;  
+                            }
+                  }while(seleccion!=0);                  
+                  break;
+              case 5:
                       ver_todos(listabarcos);              
                   break;
                                     
           }
         }while(opcion!=0);
         System.out.println("Has salido del programa");
+          
     }
-
-       
+        
+        
     
     
     public static int Menu(){
@@ -282,7 +348,8 @@ public class Interfaz1 {
         System.out.println("1- Transatlanticos");
         System.out.println("2- Containers");
         System.out.println("3- Hidroaviones");
-        System.out.println("4- Ver transportes");
+        System.out.println("4- Asimetricos");
+        System.out.println("5- Ver transportes");
         System.out.println("0- Salir");
         System.out.println("Elige una opcion");
         int opcion=teclado.nextInt();
@@ -316,7 +383,16 @@ public class Interfaz1 {
                     }
             }if(posicion==-1) System.out.println("Hidroavion no encontrado."); 
             return posicion;
-        }          
+        }  
+        public static int buscar_asimetrico(ArrayList<Barco>listabarcos,String nombre){
+            int posicion=-1;
+            for (int i = 0; i < listabarcos.size(); i++) {
+                    if(listabarcos.get(i) instanceof Asimetrico asim) {
+                        if(asim.nombre.equals(nombre))posicion=i;
+                    }
+            }if(posicion==-1) System.out.println("asimetrico no encontrado."); 
+            return posicion;
+        }               
         public static void ver_todos(ArrayList<Barco>listabarcos){
             for (int i = 0; i < listabarcos.size(); i++) {
                 if(listabarcos.get(i)instanceof Transatlantico){
@@ -328,12 +404,12 @@ public class Interfaz1 {
                       Container cont=(Container) listabarcos.get(i);
                       if(cont.hundido==false){
                             cont.ver_datos();
-                       }else System.out.println("El container "+cont.nombre+"  esta hundido");
+                       }else System.out.println("El containero "+cont.nombre+"  esta hundido");
                 }if(listabarcos.get(i)instanceof Hidroavion){
                      Hidroavion hidro=(Hidroavion) listabarcos.get(i);
                      if(hidro.hundido==false){
                          hidro.ver_datos();
-                         }else System.out.println("El hidroavion "+hidro.nombre+"  esta hundido");
+                         }else System.out.println("El hidroaviono "+hidro.nombre+"  esta hundido");
                  }
             }
       }
